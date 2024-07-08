@@ -1,0 +1,18 @@
+https://www.mongodb.com/try/download/community
+
+data directory--> C:\Program Files\MongoDB\Server\7.0\data\
+log directory--> C:\Program Files\MongoDB\Server\7.0\log\
+
+mongodb://localhost:27017
+
+environmental variables-path
+C:\Program Files\MongoDB\Server\7.0\bin
+
+https://www.mongodb.com/try/download/shell
+select package msi
+C:\Users\pusal>mongod --version
+Open new command prompt
+C:\Users\pusal>mongosh
+test> show dbs
+
+	

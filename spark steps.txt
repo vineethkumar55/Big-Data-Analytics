@@ -1,0 +1,59 @@
+Download java
+
+Download python
+
+Download Apache Spark
+
+Download Hadoop Winutils and hadoop.dll
+
+set Environmental variables
+
+Test pySpark and Spark-Shell
+
+C:\Users\pusal>spark-shell
+
+C:\Users\pusal>cd C:\spark\bin
+C:\spark\bin>pyspark
+Web UI: http://localhost:4040/
+
+
+
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import from_json, col
+from pyspark.sql.types import StructType, StructField, StringType
+
+# Initialize Spark session
+spark = SparkSession.builder \
+    .appName("KafkaSparkIntegration") \
+    .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.1") \
+    .getOrCreate()
+
+# Read data from Kafka
+kafka_df = spark.readStream \
+    .format("kafka") \
+    .option("kafka.bootstrap.servers", "localhost:9092") \
+    .option("subscribe", "test-topic") \
+    .load()
+
+# Select the value column and cast it to a string
+kafka_df = kafka_df.selectExpr("CAST(value AS STRING)")
+
+# Define schema for JSON data
+schema = StructType([
+    StructField("field1", StringType(), True),
+    StructField("field2", StringType(), True)
+])
+
+# Parse JSON data
+json_df = kafka_df.select(from_json(col("value"), schema).alias("data")).select("data.*")
+
+# Write data to console
+query = json_df.writeStream \
+    .outputMode("append") \
+    .format("console") \
+    .start()
+
+# Await termination
+query.awaitTermination()
+
+

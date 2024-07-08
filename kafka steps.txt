@@ -1,0 +1,50 @@
+Step 1: Download Apache Kafka
+
+Step 2: Extract the Kafka Archive
+
+Step 3.1: Configure Environmental Variables
+
+Step 3.2: Edit Config Files
+
+zookeper.properties
+
+dataDir=/tmp/zookeeper---> dataDir=C:/kafka_2.12-3.7.0/zookeeper
+
+server.properties
+
+log.dirs=/tmp/kafka-logs----> log.dirs=C:/kafka_2.12-3.7.0/kafka-logs
+-----------------------------------------------------------------------------------------------------------
+
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+kafka-topics.bat --create --bootstrap-server localhost:9092 --topic test
+
+kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partition 1 --topic test
+
+kafka-console-producer.bat --broker-list localhost:9092 --topic test
+
+Sample Data:
+
+{"Name: "John", "Age":"31", "Gender":"Male"}
+{"Name: "Emma", "Age":"27", "Gender":"Female"}
+{"Name: "Ronald", "Age":"17", "Gender":"Male"}
+---------------------------------------------------------------------------------------------------------
+
+kafka-console-consumer.bat --topic test --bootstrap-server localhost:9092 --from-beginning
+
+.\bin\windows\zookeeper-server-stop.bat .\config\zookeeper.properties
+
+.\bin\windows\kafka-server-stop.bat .\config\server.properties
+
+------------------------------------------------------------------------------------------------------------
+visual studio
+.\kafka-topics.bat --create --bootstrap-server localhost:9092 --topic kafka_test
+
+.\kafka-console-producer.bat --broker-list localhost:9092 --topic kafka_test
+
+.\kafka-console-consumer.bat --topic kafka_test --bootstrap-server localhost:9092 --from-beginning
+
+
+

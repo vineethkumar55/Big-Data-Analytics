@@ -1,0 +1,26 @@
+
+username: elastic
+password: encrypted format
+
+http://localhost:5601/app/management/kibana/settings
+
+CA SHA-256: a576031c98855c7740a8228ee390b246739884958b891ae04dd6fd07ed7cc6d5
+
+Enrollment Token: 
+eyJ2ZXIiOiI4LjEzLjQiLCJhZHIiOlsiMTcyLjE4LjEyOC4xOjkyMDAiXSwiZmdyIjoiMWU1NjA4ZWNmMWUwNGViMjZmN2EyNTQxODA4MDU2M2FjNTRiNDc5YWY5NTliMTRkMDE1ODM0ODgxNjkwY2NlZiIsImtleSI6IlQzdzZySThCNFlhTUF5RWthb1RjOkVJQXU2RGJQU3lXV1FXUW9aNF9lOXcifQ==
+
+set ELASTIC_PASSWORD=encrypted format
+
+curl --cacert config/certs/http_ca.crt -u elastic:$ELASTIC_PASSWORD https://localhost:9200
+
+
+C:\Users\pusal\Downloads\elasticsearch-8.13.4-windows-x86_64\elasticsearch-8.13.4>.\bin\elasticsearch.bat
+
+C:\Users\pusal\Downloads\kibana-8.13.4-windows-x86_64\kibana-8.13.4>.\bin\kibana.bat
+
+C:\Users\pusal\Downloads\logstash-8.13.4-windows-x86_64\logstash-8.13.4>.\bin\logstash.bat -f mongo_to_elastic.conf
+
+
+C:\Users\pusal\Downloads\elasticsearch-8.13.4-windows-x86_64\elasticsearch-8.13.4>.\bin\elasticsearch-create-enrollment-token -s kibana --url "https://127.0.0.1:9200"
+
+
